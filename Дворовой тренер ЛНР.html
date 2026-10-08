@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b30">
+  <title>Дворовой тренер ЛНР — презентация проекта</title>
+  <style>
+    :root { --navy:#101b30; --ink:#14223a; --lime:#e0fb64; --coral:#ff765e; --cream:#f5f3e9; --blue:#81c8f5; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; width:100%; min-height:100%; }
+    body { font-family:"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--navy); overflow:hidden; }
+    button { font:inherit; cursor:pointer; }
+    .deck { position:relative; width:100%; height:100svh; min-height:480px; overflow:hidden; }
+    .slide { position:absolute; inset:0; display:none; overflow:hidden; isolation:isolate; }
+    .slide.is-active { display:block; animation:arrive .35s ease-out both; }
+    @keyframes arrive { from { opacity:.3; transform:translateX(2%); } to { opacity:1; transform:translateX(0); } }
+    .slide__inner { position:relative; width:100%; height:100%; padding:clamp(28px,4.2vw,76px) clamp(30px,6vw,112px) clamp(86px,8vh,110px); }
+    .eyebrow { font-size:clamp(11px,1.05vw,16px); font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+    h1,h2,h3,p { margin:0; }
+    h1,h2 { font-family:Impact,"Arial Narrow","Segoe UI",sans-serif; text-transform:uppercase; font-stretch:condensed; font-weight:900; line-height:.99; letter-spacing:.008em; }
+    h1 { font-size:clamp(64px,8.5vw,155px); }
+    h2 { font-size:clamp(52px,6.4vw,118px); }
+    .photo { display:block; width:100%; height:100%; object-fit:cover; filter:contrast(1.07) saturate(1.09); }
+    .tag { display:inline-flex; align-items:center; gap:8px; padding:10px 15px; border-radius:100px; font-size:clamp(12px,1.1vw,17px); font-weight:800; white-space:nowrap; }
+    .tag--lime { background:var(--lime); color:var(--navy); }
+    .tag--navy { background:var(--navy); color:white; }
+    .asterisk { color:var(--coral); }
+    .lines { position:absolute; pointer-events:none; opacity:.22; }
+
+    /* 01 — introduction */
+    .slide--one { background:var(--navy); color:#fff; }
+    .slide--one::before { content:""; position:absolute; width:46vw; height:46vw; left:-25vw; bottom:-31vw; border:2px solid rgba(224,251,100,.18); border-radius:50%; box-shadow:0 0 0 60px rgba(224,251,100,.025),0 0 0 130px rgba(224,251,100,.025); }
+    .hero { display:grid; grid-template-columns:55% 45%; height:100%; align-items:center; }
+    .hero__copy { z-index:2; padding-bottom:1vh; }
+    .hero__copy .eyebrow { color:var(--lime); margin-bottom:clamp(22px,4vh,45px); }
+    .hero h1 { position:relative; width:115%; z-index:2; }
+    .hero h1 span { display:block; }
+    .hero h1 .accent { color:var(--lime); }
+    .hero__lead { margin-top:clamp(28px,4vh,49px); max-width:540px; font-size:clamp(19px,2.15vw,34px); font-weight:700; line-height:1.2; }
+    .hero__micro { margin-top:18px; color:#b9c5d3; font-size:clamp(13px,1.2vw,18px); }
+    .hero__visual { position:relative; height:100%; margin-left:2vw; }
+    .hero__main { position:absolute; inset:-9% -12% 12% 10%; overflow:hidden; border-radius:210px 12px 12px 12px; transform:rotate(3deg); box-shadow:0 22px 70px rgba(0,0,0,.25); }
+    .hero__main::after { content:""; position:absolute; inset:0; background:linear-gradient(15deg,rgba(16,27,48,.35),transparent 55%); }
+    .hero__small { position:absolute; width:44%; height:35%; left:-9%; bottom:0; overflow:hidden; border:9px solid var(--navy); border-radius:22px; transform:rotate(-8deg); box-shadow:0 18px 50px rgba(0,0,0,.35); }
+    .hero__stamp { position:absolute; right:-6%; bottom:0; width:clamp(104px,12vw,195px); aspect-ratio:1; border-radius:50%; background:var(--coral); color:var(--navy); display:grid; place-items:center; text-align:center; font-size:clamp(14px,1.55vw,23px); line-height:1.1; font-weight:900; text-transform:uppercase; transform:rotate(12deg); border:9px solid var(--navy); }
+
+    /* 02 — audience */
+    .slide--two { background:var(--cream); }
+    .audience { display:flex; flex-direction:column; height:100%; }
+    .audience__top { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:clamp(20px,3vh,42px); }
+    .audience__top .eyebrow { color:#527287; margin-bottom:14px; }
+    .audience h2 { max-width:850px; }
+    .audience__side { max-width:220px; padding-bottom:5px; font-size:clamp(14px,1.4vw,21px); line-height:1.2; font-weight:700; }
+    .age-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.4vw,24px); flex:1; min-height:0; }
+    .age { position:relative; overflow:hidden; border-radius:15px; background:var(--navy); color:white; }
+    .age img { position:absolute; inset:0; }
+    .age::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,25,43,.12) 5%,rgba(12,25,43,.02) 30%,rgba(12,25,43,.95) 100%); }
+    .age__number { position:absolute; z-index:1; left:7%; top:5%; color:var(--lime); font-family:Impact,"Arial Narrow",sans-serif; font-size:clamp(55px,7vw,116px); line-height:1; text-shadow:0 4px 25px rgba(0,0,0,.25); }
+    .age__bottom { position:absolute; z-index:1; left:7%; right:5%; bottom:8%; }
+    .age__bottom strong { display:block; font-size:clamp(24px,2.6vw,42px); line-height:1.08; text-transform:uppercase; }
+    .age__bottom small { display:block; margin-top:7px; color:#e0e7ee; font-size:clamp(13px,1.35vw,20px); font-weight:600; }
+    .audience__note { margin-top:clamp(12px,2vh,24px); font-size:clamp(16px,1.7vw,25px); font-weight:800; }
+    .audience__note span { color:#eb6248; }
+
+    /* 03 — mechanics */
+    .slide--three { background:var(--lime); }
+    .model { height:100%; display:grid; grid-template-columns:53% 47%; align-items:center; }
+    .model__copy { position:relative; z-index:2; }
+    .model__copy .eyebrow { margin-bottom:clamp(16px,3vh,30px); }
+    .model h2 { max-width:780px; }
+    .model__steps { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:clamp(20px,4vh,45px); }
+    .model__steps span { padding:12px 17px; background:var(--navy); border-radius:8px; color:white; font-weight:800; font-size:clamp(15px,1.35vw,22px); }
+    .model__steps b { color:var(--coral); font-size:clamp(24px,2.5vw,35px); }
+    .model__text { margin-top:clamp(15px,2.5vh,30px); max-width:640px; font-size:clamp(17px,1.85vw,29px); font-weight:700; line-height:1.23; }
+    .model__foot { margin-top:clamp(14px,2.3vh,26px); max-width:620px; font-size:clamp(13px,1.13vw,18px); line-height:1.25; font-weight:700; opacity:.75; }
+    .model__visual { position:relative; height:100%; }
+    .model__frame { position:absolute; inset:-7% -13% 11% 10%; overflow:hidden; border-radius:45% 45% 12px 12px; transform:rotate(-4deg); border:11px solid var(--navy); background:var(--navy); box-shadow:20px 25px 0 rgba(16,27,48,.12); }
+    .model__frame::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(16,27,48,.5),transparent 65%); }
+    .model__sport { position:absolute; right:-8%; bottom:4%; z-index:2; border:8px solid var(--lime); background:var(--coral); padding:18px 22px; color:var(--navy); border-radius:14px; transform:rotate(7deg); font-size:clamp(16px,1.6vw,25px); line-height:1.15; font-weight:900; text-transform:uppercase; }
+    .model__rings { position:absolute; width:17vw; height:17vw; right:-10vw; top:-9vw; border:20px solid rgba(16,27,48,.13); border-radius:50%; }
+
+    /* 04 — launch and outcome */
+    .slide--four { background:#b7dff7; }
+    .final { display:grid; grid-template-columns:56% 44%; height:100%; align-items:center; }
+    .final__copy { position:relative; z-index:2; }
+    .final__copy .eyebrow { margin-bottom:clamp(16px,3vh,30px); }
+    .final h2 { max-width:800px; }
+    .final h2 em { color:#fa694d; font-style:normal; }
+    .final__date { display:inline-block; margin-top:clamp(20px,3vh,35px); padding:12px 18px; border-radius:8px; background:var(--navy); color:white; font-size:clamp(17px,1.75vw,27px); font-weight:800; }
+    .final__sports { display:flex; gap:8px; flex-wrap:wrap; margin-top:clamp(12px,2vh,22px); }
+    .final__sports .tag { background:rgba(255,255,255,.73); }
+    .final__quote { margin-top:clamp(20px,4vh,43px); max-width:700px; font-size:clamp(20px,2.55vw,40px); font-weight:900; line-height:1.13; }
+    .final__quote span { text-decoration:underline; text-decoration-color:var(--coral); text-decoration-thickness:5px; text-underline-offset:5px; }
+    .final__visual { position:relative; height:100%; }
+    .final__blob { position:absolute; inset:-10% -20% 8% 1%; overflow:hidden; border-radius:50% 50% 12% 45%; border:12px solid var(--navy); transform:rotate(6deg); background:var(--navy); box-shadow:15px 17px 0 var(--coral); }
+    .final__blob img { transform:rotate(-6deg) scale(1.15); }
+    .final__badge { position:absolute; left:-5%; bottom:0; z-index:2; width:clamp(135px,15vw,245px); aspect-ratio:1; display:grid; place-items:center; padding:18px; border-radius:50%; background:var(--lime); border:8px solid var(--navy); color:var(--navy); text-align:center; font-family:Impact,"Arial Narrow",sans-serif; font-size:clamp(22px,2.6vw,42px); text-transform:uppercase; line-height:1.03; transform:rotate(-12deg); }
+
+    /* controls */
+    .controls { position:fixed; z-index:20; bottom:clamp(13px,2.5vh,26px); left:clamp(30px,6vw,112px); right:clamp(30px,6vw,112px); height:44px; display:flex; align-items:center; justify-content:space-between; gap:15px; color:inherit; }
+    .controls__brand { color:white; font-size:12px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; mix-blend-mode:difference; white-space:nowrap; }
+    .controls__center { display:flex; align-items:center; gap:10px; }
+    .dot { width:29px; height:7px; padding:0; border:0; border-radius:10px; background:rgba(125,135,145,.45); transition:width .2s,background .2s; }
+    .dot[aria-current="step"] { width:48px; background:var(--coral); }
+    .controls__right { display:flex; gap:8px; align-items:center; }
+    .count { min-width:45px; color:#fff; mix-blend-mode:difference; font-size:14px; font-weight:800; }
+    .light-controls .controls__brand,.light-controls .count { color:var(--navy); mix-blend-mode:normal; }
+    .arrow { display:grid; place-items:center; width:38px; height:38px; border:0; border-radius:50%; background:var(--navy); color:#fff; font-size:23px; line-height:1; transition:transform .2s,background .2s; }
+    .arrow:hover:not(:disabled) { background:#fa694d; transform:scale(1.08); }
+    .arrow:disabled { opacity:.35; cursor:default; }
+    button:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
+
+    @media (max-width:800px) {
+      .slide__inner { padding:32px 26px 88px; }
+      .controls { left:26px; right:26px; }
+      h1 { font-size:clamp(57px,11vw,92px); }
+      h2 { font-size:clamp(45px,8vw,70px); }
+      .hero { grid-template-columns:56% 44%; }
+      .hero__main { inset:0 -40% 15% 0; }
+      .hero__small { width:65%; left:-10%; }
+      .hero__stamp { right:-19%; }
+      .audience__side { display:none; }
+      .age__number { font-size:clamp(45px,8vw,75px); }
+      .age__bottom strong { font-size:clamp(19px,2.9vw,27px); }
+      .age__bottom small { font-size:12px; }
+      .model { grid-template-columns:60% 40%; }
+      .model__frame { inset:4% -45% 16% 0; }
+      .model__sport { right:-35%; }
+      .final { grid-template-columns:60% 40%; }
+      .final__blob { inset:1% -50% 15% -10%; }
+    }
+    @media (max-width:600px) {
+      .deck { min-height:0; }
+      .slide__inner { padding:24px 22px 82px; }
+      .controls { left:22px; right:22px; }
+      .controls__brand { display:none; }
+      h1 { font-size:clamp(64px,15vw,100px); }
+      h2 { font-size:clamp(52px,11vw,78px); }
+      .hero,.model,.final { display:block; }
+      .hero__copy,.model__copy,.final__copy { position:relative; z-index:2; }
+      .hero__copy .eyebrow { margin-bottom:18px; }
+      .hero h1 { width:100%; }
+      .hero__lead { margin-top:18px; font-size:21px; max-width:340px; }
+      .hero__micro { font-size:13px; }
+      .hero__visual { height:44%; position:absolute; inset:auto 0 65px 40%; margin:0; }
+      .hero__main { inset:0 -15% 4% 0; }
+      .hero__small { display:none; }
+      .hero__stamp { width:110px; right:3%; bottom:-1%; font-size:14px; }
+      .audience__top { margin-bottom:18px; }
+      .audience h2 { font-size:clamp(45px,10vw,68px); }
+      .age-grid { display:flex; flex-direction:column; gap:9px; }
+      .age { flex:1; min-height:0; }
+      .age img { object-position:center 43%; }
+      .age::after { background:linear-gradient(90deg,rgba(12,25,43,.08),rgba(12,25,43,.85)); }
+      .age__number { top:50%; left:5%; transform:translateY(-50%); font-size:56px; }
+      .age__bottom { left:37%; bottom:50%; transform:translateY(50%); }
+      .age__bottom strong { font-size:24px; }
+      .age__bottom small { margin-top:2px; }
+      .audience__note { margin-top:12px; font-size:15px; }
+      .model h2 { max-width:450px; }
+      .model__steps { margin-top:15px; }
+      .model__steps span { padding:7px 9px; font-size:13px; }
+      .model__text { margin-top:14px; font-size:17px; max-width:420px; }
+      .model__foot { margin-top:10px; font-size:12px; max-width:350px; }
+      .model__visual { position:absolute; inset:auto 0 56px 42%; height:37%; }
+      .model__frame { inset:0 -17% 10% 0; border-width:6px; }
+      .model__sport { font-size:13px; right:1%; bottom:4%; padding:9px; border-width:5px; }
+      .final h2 { max-width:480px; }
+      .final__date { margin-top:15px; font-size:16px; padding:9px 11px; }
+      .final__sports { margin-top:9px; }
+      .final__sports .tag { font-size:11px; padding:6px 8px; }
+      .final__quote { margin-top:17px; font-size:clamp(22px,6vw,31px); max-width:340px; }
+      .final__visual { position:absolute; inset:auto 0 60px 48%; height:37%; }
+      .final__blob { inset:0 -21% 12% 0; border-width:6px; }
+      .final__badge { left:-22%; width:105px; border-width:5px; font-size:18px; }
+    }
+    @media (max-height:620px) and (min-width:601px) {
+      .slide__inner { padding-top:22px; padding-bottom:64px; }
+      h1 { font-size:clamp(62px,7vw,116px); }
+      h2 { font-size:clamp(49px,5.8vw,90px); }
+      .hero__lead,.final__quote { margin-top:15px; }
+      .model__steps { margin-top:12px; }
+    }
+    @media (prefers-reduced-motion:reduce) { .slide.is-active { animation:none; } *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
+    @media print {
+      @page { size:landscape; margin:0; }
+      html,body { overflow:visible; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .deck { height:auto; min-height:0; overflow:visible; }
+      .slide,.slide.is-active { position:relative; display:block !important; width:100vw; height:100vh; min-height:0; page-break-after:always; break-after:page; animation:none; }
+      .controls { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Презентация проекта «Дворовой тренер ЛНР»">
+    <section class="slide slide--one is-active" aria-label="Слайд 1: идея проекта">
+      <div class="slide__inner hero">
+        <div class="hero__copy">
+          <div class="eyebrow">Проект для детей и подростков · ЛНР</div>
+          <h1><span>Дворовой</span><span class="accent">тренер</span><span>ЛНР<span class="asterisk" style="display:inline">.</span></span></h1>
+          <p class="hero__lead">Спорт начинается там, где ты живёшь.</p>
+          <p class="hero__micro">Площадка рядом есть. Не хватает регулярных занятий и тренера.</p>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__main"><img class="photo" src="photo-1.jpg" alt=""></div>
+          <div class="hero__small"><img class="photo" src="photo-2.jpg" alt=""></div>
+          <div class="hero__stamp">Лето<br>в движении<br>↗</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--two" aria-label="Слайд 2: возрастные группы" hidden>
+      <div class="slide__inner audience">
+        <div class="audience__top">
+          <div><div class="eyebrow">В центре проекта — ребёнок</div><h2>Для каждого —<br>свой драйв<span class="asterisk">.</span></h2></div>
+          <p class="audience__side">Разные интересы.<br>Одна команда.</p>
+        </div>
+        <div class="age-grid">
+          <article class="age"><img class="photo" src="photo-3.jpg" alt=""><div class="age__number">6–10</div><div class="age__bottom"><strong>Игра и движение</strong><small>Весело быть вместе</small></div></article>
+          <article class="age"><img class="photo" src="photo-4.jpg" alt=""><div class="age__number">11–14</div><div class="age__bottom"><strong>Командный азарт</strong><small>Учимся играть вместе</small></div></article>
+          <article class="age"><img class="photo" src="photo-5.jpg" alt=""><div class="age__number">15–17</div><div class="age__bottom"><strong>Вызов и результат</strong><small>Возможность проявить себя</small></div></article>
+        </div>
+        <p class="audience__note">Важно не просто прийти, а <span>захотеть вернуться.</span></p>
+      </div>
+    </section>
+
+    <section class="slide slide--three" aria-label="Слайд 3: модель занятий" hidden>
+      <div class="slide__inner model">
+        <div class="model__copy">
+          <div class="eyebrow">Как работает проект</div>
+          <h2>Не разовая акция.<br>Привычка двигаться<span class="asterisk">.</span></h2>
+          <div class="model__steps"><span>Площадка</span><b>+</b><span>Тренер</span><b>+</b><span>Расписание</span></div>
+          <p class="model__text">Бесплатные занятия, игры и дворовые команды — регулярно, рядом с домом.</p>
+          <p class="model__foot">Проверка идеи и рисков с помощью ИИ помогла уточнить главный фокус: удержание участников.</p>
+        </div>
+        <div class="model__visual" aria-hidden="true">
+          <div class="model__rings"></div>
+          <div class="model__frame"><img class="photo" src="photo-2.jpg" alt=""></div>
+          <div class="model__sport">Играй.<br>Возвращайся.<br>Расти. ↗</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--four" aria-label="Слайд 4: пилот и результат" hidden>
+      <div class="slide__inner final">
+        <div class="final__copy">
+          <div class="eyebrow">Пилотный запуск · Луганск</div>
+          <h2>Лето 2027.<br><em>Играем</em><br>вместе<span class="asterisk">.</span></h2>
+          <div class="final__date">01 июня — 30 августа 2027</div>
+          <div class="final__sports"><span class="tag">⚽ Футбол 6×6</span><span class="tag">🏀 Баскетбол 3×3</span><span class="tag">🏐 Волейбол 4×4</span></div>
+          <p class="final__quote">Главный результат — <span>дети возвращаются</span> на занятия.</p>
+        </div>
+        <div class="final__visual" aria-hidden="true">
+          <div class="final__blob"><img class="photo" src="photo-5.jpg" alt=""></div>
+          <div class="final__badge">Начало<br>большой<br>команды ↗</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Навигация по слайдам">
+    <div class="controls__brand">Дворовой тренер ЛНР</div>
+    <div class="controls__center" role="group" aria-label="Выбрать слайд">
+      <button class="dot" type="button" aria-label="Слайд 1" aria-current="step" data-slide="0"></button>
+      <button class="dot" type="button" aria-label="Слайд 2" data-slide="1"></button>
+      <button class="dot" type="button" aria-label="Слайд 3" data-slide="2"></button>
+      <button class="dot" type="button" aria-label="Слайд 4" data-slide="3"></button>
+    </div>
+    <div class="controls__right"><span class="count" aria-live="polite">01 / 04</span><button class="arrow" id="prev" type="button" aria-label="Предыдущий слайд">←</button><button class="arrow" id="next" type="button" aria-label="Следующий слайд">→</button></div>
+  </nav>
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const dots = [...document.querySelectorAll('.dot')];
+      const counter = document.querySelector('.count');
+      const prev = document.querySelector('#prev');
+      const next = document.querySelector('#next');
+      let current = 0;
+      function show(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        document.body.classList.toggle('light-controls', current !== 0);
+        slides.forEach((slide, i) => { slide.hidden = i !== current; slide.classList.toggle('is-active', i === current); });
+        dots.forEach((dot, i) => { if (i === current) dot.setAttribute('aria-current', 'step'); else dot.removeAttribute('aria-current'); });
+        counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        history.replaceState(null, '', `#${current + 1}`);
+      }
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+      document.addEventListener('keydown', event => {
+        if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(current + 1); }
+        if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); show(current - 1); }
+        if (event.key === 'Home') show(0);
+        if (event.key === 'End') show(slides.length - 1);
+      });
+      let startX = 0;
+      document.addEventListener('touchstart', event => { startX = event.changedTouches[0].screenX; }, { passive:true });
+      document.addEventListener('touchend', event => { const delta = event.changedTouches[0].screenX - startX; if (Math.abs(delta) > 65) show(current + (delta < 0 ? 1 : -1)); }, { passive:true });
+      window.addEventListener('hashchange', () => { const n = Number(location.hash.slice(1)); if (Number.isInteger(n) && n >= 1 && n <= slides.length) show(n - 1); });
+      const initial = Number(location.hash.slice(1));
+      show(Number.isInteger(initial) && initial >= 1 && initial <= slides.length ? initial - 1 : 0);
+    })();
+  </script>
+</body>
+</html>
